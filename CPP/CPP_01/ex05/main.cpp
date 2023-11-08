@@ -8,7 +8,8 @@ int main() {
 	while (true) {
 		std::string input;
 		std::cout << "Enter a log level (DEBUG, INFO, WARNING, ERROR) or 'exit' to quit: ";
-		std::cin >> input;
+
+		std::getline(std::cin, input);
 
 		if (std::cin.eof()) {
 			break;

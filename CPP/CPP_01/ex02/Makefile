@@ -1,7 +1,7 @@
 NAME = brain_printer
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
