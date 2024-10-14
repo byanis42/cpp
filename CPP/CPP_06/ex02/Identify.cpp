@@ -4,6 +4,8 @@
 #include "C.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <typeinfo>  // Nécessaire pour std::bad_cast
 
 // Fonction identify avec un pointeur
 void identify(Base* p) {
@@ -20,20 +22,34 @@ void identify(Base* p) {
 
 // Fonction identify avec une référence
 void identify(Base& p) {
-	// Utiliser un cast manuel pour éviter les exceptions et les variables inutilisées
-	Base* ptr = &p;
+    try {
+        // Essayer de caster vers A
+        dynamic_cast<A&>(p);  // Pas besoin de la variable
+        std::cout << "A" << std::endl;
+        return;
+    } catch (const std::bad_cast&) {
+        // Si le cast échoue, passer au suivant
+    }
 
-	if (dynamic_cast<A*>(ptr)) {
-		std::cout << "A" << std::endl;
-	} else if (dynamic_cast<B*>(ptr)) {
-		std::cout << "B" << std::endl;
-	} else if (dynamic_cast<C*>(ptr)) {
-		std::cout << "C" << std::endl;
-	} else {
-		std::cout << "Unknown type" << std::endl;
-	}
+    try {
+        // Essayer de caster vers B
+        dynamic_cast<B&>(p);  // Pas besoin de la variable
+        std::cout << "B" << std::endl;
+        return;
+    } catch (const std::bad_cast&) {
+        // Si le cast échoue, passer au suivant
+    }
+
+    try {
+        // Essayer de caster vers C
+        dynamic_cast<C&>(p);  // Pas besoin de la variable
+        std::cout << "C" << std::endl;
+    } catch (const std::bad_cast&) {
+        std::cout << "Unknown type" << std::endl;
+    }
 }
 
+// Fonction generate qui retourne un pointeur Base* aléatoire vers A, B ou C
 Base* generate() {
 	// Initialiser le générateur aléatoire une seule fois
 	static bool initialized = false;
