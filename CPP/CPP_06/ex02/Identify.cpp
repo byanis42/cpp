@@ -22,31 +22,31 @@ void identify(Base* p) {
 
 // Fonction identify avec une référence
 void identify(Base& p) {
-	try {
-		// Essayer de caster vers A
-		dynamic_cast<A&>(p);  // Pas besoin de la variable
-		std::cout << "A" << std::endl;
-		return;
-	} catch (const std::bad_cast&) {
-		// Si le cast échoue, passer au suivant
-	}
+    try {
+        // Essayer de caster vers A
+        (void)dynamic_cast<A&>(p);  // Cast réussi, utiliser (void) pour indiquer que le résultat est intentionnellement ignoré
+        std::cout << "A" << std::endl;
+        return;
+    } catch (const std::bad_cast&) {
+        // Si le cast échoue, passer au suivant
+    }
 
-	try {
-		// Essayer de caster vers B
-		dynamic_cast<B&>(p);  // Pas besoin de la variable
-		std::cout << "B" << std::endl;
-		return;
-	} catch (const std::bad_cast&) {
-		// Si le cast échoue, passer au suivant
-	}
+    try {
+        // Essayer de caster vers B
+        (void)dynamic_cast<B&>(p);  // Cast réussi
+        std::cout << "B" << std::endl;
+        return;
+    } catch (const std::bad_cast&) {
+        // Si le cast échoue, passer au suivant
+    }
 
-	try {
-		// Essayer de caster vers C
-		dynamic_cast<C&>(p);  // Pas besoin de la variable
-		std::cout << "C" << std::endl;
-	} catch (const std::bad_cast&) {
-		std::cout << "Unknown type" << std::endl;
-	}
+    try {
+        // Essayer de caster vers C
+        (void)dynamic_cast<C&>(p);  // Cast réussi
+        std::cout << "C" << std::endl;
+    } catch (const std::bad_cast&) {
+        std::cout << "Unknown type" << std::endl;
+    }
 }
 
 // Fonction generate qui retourne un pointeur Base* aléatoire vers A, B ou C

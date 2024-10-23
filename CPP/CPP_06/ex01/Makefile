@@ -1,5 +1,5 @@
 # Variables
-CXX = g++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp Serializer.cpp Data.cpp
 OBJS_DIR = .objs/
