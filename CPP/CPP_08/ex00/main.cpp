@@ -1,44 +1,56 @@
+#include "easyfind.hpp"
 #include <vector>
 #include <list>
+#include <deque>
 #include <iostream>
-#include "easyfind.hpp"
+
+void testVector() {
+	std::vector<int> vec;
+	for (int i = 0; i < 10; ++i) {
+		vec.push_back(i * 2); // Remplit avec des nombres pairs: 0, 2, 4, ...
+	}
+
+	try {
+		std::cout << "Test vector - Found: " << *easyfind(vec, 6) << std::endl;
+		std::cout << "Test vector - Found: " << *easyfind(vec, 3) << std::endl; // Doit lancer une exception
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+}
+
+void testList() {
+	std::list<int> lst;
+	for (int i = 0; i < 10; ++i) {
+		lst.push_back(i);
+	}
+
+	try {
+		std::cout << "Test list - Found: " << *easyfind(lst, 9) << std::endl;
+		std::cout << "Test list - Found: " << *easyfind(lst, -1) << std::endl; // Doit lancer une exception
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+}
+
+void testDeque() {
+	std::deque<int> dq;
+	dq.push_back(10);
+	dq.push_back(20);
+	dq.push_back(30);
+	dq.push_back(40);
+	dq.push_back(50);
+
+	try {
+		std::cout << "Test deque - Found: " << *easyfind(dq, 20) << std::endl;
+		std::cout << "Test deque - Found: " << *easyfind(dq, 100) << std::endl; // Doit lancer une exception
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+}
 
 int main() {
-	// Test avec un vector
-	std::vector<int> vec;
-	vec.push_back(10);
-	vec.push_back(20);
-	vec.push_back(30);
-	vec.push_back(40);
-	vec.push_back(50);
-
-	try {
-		std::vector<int>::iterator it = easyfind(vec, 30);
-		std::cout << "Element found: " << *it << std::endl;
-	} catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	try {
-		easyfind(vec, 100); // Doit lancer une exception
-	} catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-	}
-
-	// Test avec une liste
-	std::list<int> lst;
-	lst.push_back(5);
-	lst.push_back(15);
-	lst.push_back(25);
-	lst.push_back(35);
-	lst.push_back(45);
-
-	try {
-		std::list<int>::iterator it = easyfind(lst, 25);
-		std::cout << "Element found: " << *it << std::endl;
-	} catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-	}
-
+	testVector();
+	testList();
+	testDeque();
 	return 0;
 }

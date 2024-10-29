@@ -6,7 +6,7 @@
 #include <exception> // pour std::exception
 #include <iostream>
 
-// Définition d'une exception personnalisée si l'élément n'est pas trouvé
+// Exception si l'élément n'est pas trouvé
 class NotFoundException : public std::exception {
 public:
 	const char* what() const throw() {
